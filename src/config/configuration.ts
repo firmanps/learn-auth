@@ -5,6 +5,9 @@ export default () => ({
     env: env.NODE_ENV,
   },
   cors: {
-    origins: env.CORS_ORIGINS
-  }
+    origins: env.CORS_ORIGINS,
+  },
+  database: {
+    url: env.DATABASE_URL,
+  },
 });
