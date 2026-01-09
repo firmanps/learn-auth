@@ -21,6 +21,9 @@ async function bootstrap() {
     credentials: true,
   });
 
+  //prefix endpoint
+  app.setGlobalPrefix('/api');
+
   await app.listen(port);
 }
 bootstrap();
