@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { LoggingModule } from './common/logger/logger.module';
+import { PrismaModule } from './common/prisma/prisma.module';
 import configuration from './config/configuration';
 
 @Module({
@@ -10,6 +11,7 @@ import configuration from './config/configuration';
       load: [configuration],
     }),
     LoggingModule,
+    PrismaModule,
   ],
   controllers: [],
   providers: [],
