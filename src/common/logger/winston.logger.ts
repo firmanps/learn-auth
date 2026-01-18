@@ -7,7 +7,7 @@ export class WinstonLogger implements LoggerService {
   private readonly logger: winston.Logger;
 
   constructor(config: ConfigService) {
-    const isProd = config.getOrThrow('app.env') === 'production';
+    const isProd = config.getOrThrow('app.nodeEnv') === 'production';
 
     this.logger = winston.createLogger({
       level: isProd ? 'info' : 'debug',

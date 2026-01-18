@@ -1,19 +1,18 @@
-import { z } from 'zod';
-import { AuthBaseSchema } from './auth-base.schema';
+import { IsEmail, IsNotEmpty, IsString, MaxLength, MinLength } from "class-validator"
+export class CreateAuthDto{
+   @IsNotEmpty()
+   @IsString()
+   @MaxLength(50)
+   username: string
 
-export const CreateAuthSchema = AuthBaseSchema;
+   @IsNotEmpty()
+   @IsEmail()
+   @MaxLength(100)
+   email: string
 
-//contoh memberikan default value
-// export const CreateAuthSchema = AuthBaseSchema.extend({
-//   username: AuthBaseSchema.shape.username.default('TODO'),
-// });
-
-//contoh kalau ada yang optional
-// export const CreateAuthSchema = AuthBaseSchema.pick({
-//   username: true,
-//   password: true,
-// }).extend({
-//   email: AuthBaseSchema.shape.email.optional(),
-// });
-
-export type CreateAuthDto = z.infer<typeof CreateAuthSchema>;
+   @IsNotEmpty()
+   @IsString()
+   @MinLength(8)
+   @MaxLength(255)
+   password: string
+}

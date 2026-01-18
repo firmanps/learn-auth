@@ -1,6 +1,4 @@
-import { z } from 'zod';
-import { AuthBaseSchema } from './auth-base.schema';
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateAuthDto } from "./create-auth.dto";
 
-export const UpdateAuthSchema = AuthBaseSchema.partial();
-
-export type UpdateAuthDto = z.infer<typeof UpdateAuthSchema>;
+export class UpdateAuthDto extends PartialType(CreateAuthDto){}

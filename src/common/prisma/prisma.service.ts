@@ -17,7 +17,7 @@ export class PrismaService
 
   constructor(private readonly config: ConfigService) {
     const url = config.getOrThrow<string>('database.url');
-    const env = config.get<string>('app.env');
+    const env = config.get<string>('app.nodeEnv');
 
     super({
       adapter: new PrismaPg({ connectionString: url }),

@@ -1,16 +1,12 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { LoggingModule } from './common/logger/logger.module';
 import { PrismaModule } from './common/prisma/prisma.module';
+import { ConfigModule } from './config/config.module';
 import { AuthModule } from './modules/auth/auth.module';
-import configuration from './config/configuration';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      load: [configuration],
-    }),
+    ConfigModule,
     LoggingModule,
     PrismaModule,
     AuthModule,

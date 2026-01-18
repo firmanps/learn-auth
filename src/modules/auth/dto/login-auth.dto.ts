@@ -1,8 +1,13 @@
-import { z } from 'zod';
-import { AuthBaseSchema } from './auth-base.schema';
-export const LoginAuthSchema = AuthBaseSchema.pick({
-  email: true,
-  password: true,
-});
+import { IsEmail, IsNotEmpty, IsString, MaxLength, MinLength } from "class-validator"
+export class LoginAuthDto{
+   @IsNotEmpty()
+   @IsEmail()
+   @MaxLength(100)
+   email: string
 
-export type LoginAuthDto = z.infer<typeof LoginAuthSchema>;
+   @IsNotEmpty()
+   @IsString()
+   @MinLength(8)
+   @MaxLength(255)
+   password: string
+}
