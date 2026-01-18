@@ -2,9 +2,8 @@ import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import * as cookieParser from 'cookie-parser';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { AppModule } from './app.module';
-import { HttpLoggingInterceptor } from './common/logger/http-logging.interceptor';
-import { WinstonLogger } from './common/logger/winston.logger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,9 +12,8 @@ async function bootstrap() {
   const origin = configService.getOrThrow<string[]>('app.corsOrigins');
 
   //logger
-  const logger = app.get(WinstonLogger);
-  app.useLogger(logger);
-  app.useGlobalInterceptors(new HttpLoggingInterceptor(logger));
+  app.getHttpAdapter().getInstance().set('trust proxy', 1);
+  app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
 
   //cookie-parser
   app.use(cookieParser());
